@@ -1,0 +1,10 @@
+.welcome{
+    text-align: center;
+    font-family: 'McLaren', cursive;
+}
+.message{
+    font-family: 'McLaren', cursive;
+}
+body{
+    background-image: url(/assets/dash.jpg);
+}

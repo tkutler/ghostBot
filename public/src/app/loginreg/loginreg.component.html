@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+
+    
+    
+</head>
+
+<body>
+
+        <div class="register">
+            <div class="form-row">
+                <form (submit)="register()">
+                    <div class="form-group col-md-6">
+                        <h4 class ="headers">Register</h4>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <p class ="fields"><input type="email" name="email" [(ngModel)]="newUser.email" required minlength="4" #email = "ngModel" placeholder="email address" /></p>
+                    </div>
+                    
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                    class="not">
+                        <div *ngIf="email.errors.required">
+                            Email must be valid.
+                        </div>
+                        <div *ngIf="email.errors.minlength">
+                            Email must be valid.
+                        </div>
+                    </div> 
+                    <div class = "trigger">
+                        <p *ngIf="newUser.email.length < 6 && buttonTriggered">
+                                The Email submitted was invalid.
+                        </p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <p class = "fields"><input type="password" name="password" required minlength = "5" [(ngModel)]="newUser.password"  #password = "ngModel" placeholder="password" /></p>
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                    class="not">
+                        <div *ngIf="password.errors.required">
+                            Password is required.
+                        </div>
+                        <div *ngIf="password.errors.minlength">
+                            Password must be at least 5 characters long.
+                        </div>
+                    </div>
+                    <div class = "trigger">
+                        <p *ngIf="newUser.password.length < 5 && buttonTriggered">
+                                The password submitted was less than 5 characters.Please try again.
+                        </p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <p class = "fields"><input type="submit"  value="Register" [disabled]="newUser.password.length < 5"/></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login">
+            <div class="form-row">
+                <form (submit)="login()">
+                    <div class="form-group col-md-6">
+                        <h4 class ="headers">Login</h4>
+                        <p class ="fields"><input type="text" name="currentUser.email" [(ngModel)]="currentUser.email"
+                                placeholder="email address" /></p>
+                    </div>
+                    <div class = "trigger">
+                            <p *ngIf="currentUser.email.length < 5 && buttonTriggered">
+                                    Login info is invalid.Please try again.
+                            </p>
+                        </div>
+
+                    <div class="form-group col-md-6">
+                        <p class = "fields"><input type="password" name="currentUser.password" [(ngModel)]="currentUser.password"
+                                placeholder="password"></p>
+                        <p class="fields"><input type="submit" value="Login" /></p>
+                    </div>
+                    <div class = "trigger">
+                            <p *ngIf="currentUser.password.length < 5 && buttonTriggered">
+                                    Login info is invalid. Please try again.
+                            </p>
+                        </div>
+                        <div class = "not">
+                            <p *ngIf="notFound">
+                                    User is not found.
+                            </p>
+                        </div>
+
+    <!-- </div> 
+    
+</body> -->
+

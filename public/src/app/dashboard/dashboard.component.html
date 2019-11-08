@@ -1,0 +1,43 @@
+
+<body>
+    <h1 class='welcome'>Welcome {{logged_user_email}}!</h1>
+
+    <div>
+        <table class="table table-hover">
+            <tr>
+                <th>User</th>
+                <th>Message</th>
+                <th>Delete</th>
+                <th>Report</th>
+            </tr>
+            <tr *ngFor="let message of messages; let i = index">
+                <td>{{message.user}}</td>
+                <td>{{message.message}}</td>
+                <ng-container *ngIf="message.user == logged_user_email">
+                    <td><button (click)="delete(i)">Delete</button></td>
+                    <ng-container [ngSwitch]="message.is_spam">
+                        <span *ngSwitchCase="false">N/A</span>
+                        <span *ngSwitchCase="true">Reported</span>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="message.user != logged_user_email">
+                    <td>N/A</td>
+                    <td>
+                        <ng-container [ngSwitch]="message.is_spam">
+                            <button *ngSwitchCase="false" (click)="report(i)">Report</button>
+                            <span *ngSwitchCase="true">Reported</span>
+                        </ng-container>
+                    </td>
+                </ng-container>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h6 class="message"> Message:</h6>
+        <form (submit)="postMessage()">
+            <label for="message"></label>
+            <input class="form-control form-control-lg" type="text" name="message" [(ngModel)]="newMessage">
+            <button type="submit" class="btn btn-primary mb-2">Send</button>
+        </form>
+    </div>
+</body>
